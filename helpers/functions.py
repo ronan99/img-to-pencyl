@@ -31,7 +31,7 @@ def getPathToSave(path , conversor = ""):
     
     aux = image_name.split('.')
     # print(pathSplitted + "\\" + aux[0] + "_pencyl." + aux[1])
-    return pathSplitted + "\\" + aux[0] + "_pencyl" + conversor + "." + aux[1]
+    return pathSplitted + "\\" + aux[0] + "_pencyl" + conversor + "." + aux[-1]
 
 
 def convertImageOption1(entry):
@@ -46,7 +46,8 @@ def convertImageOption1(entry):
     blurred = cv2.GaussianBlur(inverted_image, (21, 21), 0)
     inverted_blurred = 255 - blurred
     pencil_sketch = cv2.divide(gray_image, inverted_blurred, scale=256.0)
-
+    # print(getPathToSave(entry , "1"))
+    # return
     cv2.imwrite(getPathToSave(entry , "1") , pencil_sketch)
     # cv2.imshow("Original Image", image)
     # cv2.imshow("Pencil Sketch of Dog", pencil_sketch)
@@ -67,4 +68,4 @@ def convertImageOption2(entry):
     
     
 def convertImageOption3(entry):
-    sketch.normalsketch(entry, "\\".join(getPathToSave(entry).split("\\")[:-1]) , getImageName(entry).split(".")[0] + "_pencyl3" , scale = 5)
+    sketch.normalsketch(entry, "\\".join(getPathToSave(entry).split("\\")[:-1]) , getImageName(entry).split(".")[0] + "_pencyl3" , scale = 10)
